@@ -72,6 +72,9 @@ removeBtn.addEventListener("click", () => {
         deleteFromArray(workerName, workerYear, workerDate, workerSalary);
         addRows();
     });
+
+    const sumOfChecked = document.querySelector("#sumOfChecked");
+    sumOfChecked.innerHTML = "";
 });
 
 submitBtn.addEventListener("click", (event) => {
