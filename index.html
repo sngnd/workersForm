@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+</head>
+
+<body>
+    <form id="form">
+        <fieldset>
+            <label for="name">Name:</label>
+            <input type="text" id="name" required />
+        </fieldset>
+
+        <fieldset>
+            <label for="year">Year:</label>
+            <input type="number" id="year" required />
+        </fieldset>
+
+        <fieldset>
+            <label for="date">Employment date:</label>
+            <input type="date" id="date" required />
+        </fieldset>
+
+        <fieldset>
+            <label for="salary">Salary:</label>
+            <input type="number" id="salary" required />
+        </fieldset>
+
+        <button type="submit" id="submitBtn">Submit</button>
+    </form>
+
+    <p>Number of workers: <span id="number-of-workers"></span></p>
+    <p>Sum $: <span id="salary-sum"></span></p>
+
+    <table id="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Birth year</th>
+                <th>Employment Date</th>
+                <th>Salary</th>
+            </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+    </table>
+    <br />
+    <button id="removeBtn">Remove</button>
+    <button id="sumBtn">Sum</button>
+    <p id="sumOfChecked"></p>
+    <script src="index.js"></script>
+</body>
+
+</html>
