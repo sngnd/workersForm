@@ -10,7 +10,6 @@ button {
 }
 
 table {
-    width: 300px;
     border-collapse: collapse;
 }
 
@@ -18,4 +17,18 @@ td,
 th {
     padding: 0.5rem 1rem;
     border: 1px solid black;
+}
+
+.from-least,
+.from-greatest {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    padding: 0;
+    font-size: 1rem;
+}
+
+.from-least:hover,
+.from-greatest:hover {
+    color: tomato;
 }

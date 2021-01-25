@@ -2,8 +2,47 @@ const submitBtn = document.querySelector("#submitBtn");
 const tableBody = document.querySelector("#tbody");
 const removeBtn = document.querySelector("#removeBtn");
 const sumBtn = document.querySelector("#sumBtn");
+const sortableColumns = [...document.querySelectorAll(".sortable")];
 
 let array = [];
+
+sortableColumns.forEach((item) =>
+    item.addEventListener("click", (event) => {
+        if (event.target.closest(".from-least")) {
+            sortFromLeastToGreatest(event.target.parentElement);
+            addRows();
+        } else if (event.target.closest(".from-greatest")) {
+            sortFromGreatestToLeast(event.target.parentElement);
+            addRows();
+        }
+    })
+);
+
+const sortFromLeastToGreatest = (th) => {
+    const idName = th.id;
+    if (idName === "worker_year") {
+        array.sort((a, b) => a.year - b.year);
+    } else if (idName === "worker_date") {
+        array.sort((a, b) => {
+            const dateA = new Date(a.date);
+            const dateB = new Date(b.date);
+            return dateA - dateB;
+        });
+    }
+};
+
+const sortFromGreatestToLeast = (th) => {
+    const idName = th.id;
+    if (idName === "worker_year") {
+        array.sort((a, b) => b.year - a.year);
+    } else if (idName === "worker_date") {
+        array.sort((a, b) => {
+            const dateA = new Date(a.date);
+            const dateB = new Date(b.date);
+            return dateB - dateA;
+        });
+    }
+};
 
 const addRows = () => {
     displayNumberOfWorkersAndSum();
@@ -23,10 +62,12 @@ const addRows = () => {
 
 const displayNumberOfWorkersAndSum = () => {
     const numberOfWorkers = document.querySelector("#number-of-workers");
-    numberOfWorkers.textContent = array.length;
     const salarySum = document.querySelector("#salary-sum");
     let sum = 0;
+
     array.forEach((item) => (sum += +item.salary));
+
+    numberOfWorkers.textContent = array.length;
     salarySum.textContent = sum;
 };
 
@@ -57,6 +98,7 @@ const deleteFromArray = (name, year, date, salary) => {
         1
     );
 };
+
 removeBtn.addEventListener("click", () => {
     const checkBoxes = [
         ...document.querySelectorAll("input[type=checkbox]:checked"),
@@ -70,16 +112,14 @@ removeBtn.addEventListener("click", () => {
         const workerSalary = parentTd.querySelector(".worker_salary").textContent;
 
         deleteFromArray(workerName, workerYear, workerDate, workerSalary);
-        addRows();
     });
-
-    const sumOfChecked = document.querySelector("#sumOfChecked");
-    sumOfChecked.innerHTML = "";
+    addRows();
 });
 
 submitBtn.addEventListener("click", (event) => {
     event.preventDefault();
 
+    const form = document.querySelector("#form");
     const name = document.querySelector("#name").value;
     const year = document.querySelector("#year").value;
     const date = document.querySelector("#date").value;
@@ -90,6 +130,8 @@ submitBtn.addEventListener("click", (event) => {
 
         addRows();
     } else alert("Enter unique value!");
+
+    //form.reset();
 });
 
 sumBtn.addEventListener("click", () => {
@@ -103,6 +145,6 @@ sumBtn.addEventListener("click", () => {
         const parentTd = item.parentElement.parentElement;
         const workerSalary = parentTd.querySelector(".worker_salary").textContent;
         sum += +workerSalary;
-        sumOfChecked.innerHTML = `Sum = ${sum}`;
     });
+    sumOfChecked.innerHTML = `Sum = ${sum}`;
 });
