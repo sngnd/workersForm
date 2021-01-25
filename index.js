@@ -131,7 +131,7 @@ submitBtn.addEventListener("click", (event) => {
         addRows();
     } else alert("Enter unique value!");
 
-    //form.reset();
+    form.reset();
 });
 
 sumBtn.addEventListener("click", () => {
